@@ -5,15 +5,21 @@
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "concurrently": "^4.1.0",
+    "cors": "^2.8.5",
     "express": "^4.17.0",
     "git": "^0.1.5",
     "mongodb": "^3.2.6",
-    "mongoose": "^5.5.11"
+    "mongoose": "^5.5.11",
+    "nodemon": "^1.19.1",
+    "react": "^16.8.6"
   },
   "devDependencies": {},
   "scripts": {
+    "back": "nodemon app.js",
+    "front": "cd ./views/front && npm run front",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "dev": "concurrently \"npm run back\" \"npm run front\""
   },
   "author": "",
   "license": "ISC"

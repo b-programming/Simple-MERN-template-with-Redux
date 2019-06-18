@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 //import product routes
 const product = require('./routes/product.route');
@@ -15,13 +16,14 @@ mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 //json parsing
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 //home url and port binding
 app.use('/products', product);
-let port = 1234;
+let port = 5000;
 //server start response
 app.listen(port, () => {
     console.log('Server is up and running on port numner ' + port);

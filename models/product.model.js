@@ -7,10 +7,15 @@ let ProductSchema = new Schema({
     required: true,
     max: 100
   },
-  price: {
+  password: {
+    type: String,
+    required: true,
+    max:100
+  },
+  v: {
     type: Number,
     required: true
-  },
+  }
 });
 
 
