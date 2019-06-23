@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import {login} from '../actions/postActions';
 
-export default class extends Component {
+class postForm extends Component {
 constructor(props){
   super(props);
   this.state = {
@@ -18,35 +21,19 @@ onChange(e) {
 }
 onSubmit(e) {
  e.preventDefault();
- var newState = this.state.v +1;
- this.setState({v: newState});
-  var details = {
-  'name': this.state.name,
-  'password': this.state.password,
-  'v': this.state.v
-}
-var formBody = [];
-for (var property in details) {
-var encodedKey = encodeURIComponent(property);
-var encodedValue = encodeURIComponent(details[property]);
-formBody.push(encodedKey + "=" + encodedValue);
-}
-formBody = formBody.join("&");
-
-fetch('http://localhost:5000/products/create', {
-method: 'POST',
-headers: {
-  'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-},
-body: formBody
-}).then(res => res.json())
-.then(res => {this.setState({userName: res})});
+ var sequence = this.state.v + 1;
+ this.setState({v: sequence});
+ var post = {
+   name: this.state.name,
+   password: this.state.password,
+   v: this.state.v
+ }
+this.props.login(post);
 }
 
   render() {
     return (
       <div>
-        <h1>User: {this.state.userName}</h1>
         <h1>Post Form</h1>
         <form onSubmit={this.onSubmit}>
           <div>
@@ -64,3 +51,8 @@ body: formBody
     )
   }
 }
+postForm.propTypes = {
+login: PropTypes.func.isRequired
+};
+
+export default connect(null, {login})(postForm);

@@ -11,9 +11,6 @@ function App() {
   return (
     <Provider store={store}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
       <PostForm />
       <Posts />
     </div>

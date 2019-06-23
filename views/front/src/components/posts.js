@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {login} from '../actions/postActions';
+import {getUser} from '../actions/postActions';
 import PropTypes from "prop-types";
 
 class Posts extends React.Component {
-    
+
   //intialize fetch action
   componentWillMount() {
-      this.props.login();
-      
+      this.props.getUser();
     }
     render() {
           return ( 
-         
          <div>
+          <h1>Username: {this.props.user}</h1><br />
+          <h2>SearchById: </h2>
             name: {
               this.props.posts.name
             } < br />
@@ -31,13 +31,28 @@ class Posts extends React.Component {
           );
         }
       }
-//fix posts array/object changing
       Posts.propTypes = {
-       login: PropTypes.func.isRequired,
-       posts: PropTypes.object.isRequired
+       getUser: PropTypes.func.isRequired,
+       posts: PropTypes.object.isRequired,
+       login: PropTypes.object,
+       user: PropTypes.string
       }
 
+    let check = {
+      ifString: function(state) {
+        if (typeof state.posts.item === 'string' ) return state.posts.item
+        else return null
+    },
+      ifObj: function(state) {
+      if (typeof state.posts.item === 'object' ) return state.posts.item
+      else return null
+    }
+  }
+    
+
 const mapStateToProps = state => ({
-  posts: state.posts.items
+  posts: state.posts.items,
+  login: check.ifObj(state),
+  user: check.ifString(state)
 });      
-export default connect(mapStateToProps, { login })(Posts);
+export default connect(mapStateToProps, { getUser })(Posts);
