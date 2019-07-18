@@ -10,7 +10,7 @@ constructor(props){
      name: '',
      password: '',
      v: 0,
-     userName:''
+     email:''
   };
 
   this.onChange = this.onChange.bind(this);
@@ -26,6 +26,7 @@ onSubmit(e) {
  var post = {
    name: this.state.name,
    password: this.state.password,
+   email: this.state.email,
    v: this.state.v
  }
 this.props.login(post);
@@ -43,6 +44,10 @@ this.props.login(post);
           <div>
             <label>Password: </label><br />
             <input type="password" name="password" onChange={this.onChange} value={this.state.password}/>
+          </div>
+          <div>
+            <label>Email: </label><br />
+            <input type="text" name="email" onChange={this.onChange} value={this.state.email}/>
           </div>
           <br />
           <button type="submit">Submit</button>

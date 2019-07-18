@@ -1,13 +1,26 @@
-import { FETCH_POSTS, NEW_POSTS } from './types';
+import { FETCH_POSTS, NEW_POSTS, FETCH_BY_NAME } from './types';
+var url = require('url');
 
-export const getUser = () => dispatch => {
-  fetch('http://localhost:5000/products/5d082bb89501e113334e5c8e')
+export const getUserName = (name) => dispatch => {
+  const myURL = new URL(name, 'http://localhost:5000/home/login/id/'); 
+  fetch(myURL)
+     .then(res => res.json())
+     .then(res =>   dispatch({
+         type: FETCH_BY_NAME,
+         payload: res[0]
+     })
+     //console.log(res)
+   );
+ }
+
+ export const getUser = () => dispatch => {
+ fetch('http://localhost:5000/home/login/5d2b84b92be9c2277464d9c2')
     .then(res => res.json())
     .then(result => dispatch({
         type: FETCH_POSTS,
         payload: result
     })
-  );
+  ); 
 }
 
 export const login = (details) => dispatch => {
@@ -19,7 +32,7 @@ export const login = (details) => dispatch => {
  }
  formBody = formBody.join("&");
  
- fetch('http://localhost:5000/products/create', {
+ fetch('http://localhost:5000/home/login/create', {
  method: 'POST',
  headers: {
    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'

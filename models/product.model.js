@@ -1,13 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 //schema setup(maping db data)
-let ProductSchema = new Schema({
+let LoginSchema = new Schema({
   name: {
     type: String,
     required: true,
     max: 100
   },
   password: {
+    type: String,
+    required: true,
+    max:100
+  },
+  email: {
     type: String,
     required: true,
     max:100
@@ -20,4 +25,4 @@ let ProductSchema = new Schema({
 
 
 // Export the model
-module.exports = mongoose.model('Product', ProductSchema);
+module.exports = mongoose.model('Login', LoginSchema);

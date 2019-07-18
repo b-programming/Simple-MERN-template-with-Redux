@@ -6,7 +6,7 @@ const product = require('./routes/product.route');
 const app = express();
 // Set up mongoose connection
 const mongoose = require('mongoose');
-let dev_db_url = 'mongodb+srv://<User>:<Password>@productstutorial-ur2qd.mongodb.net/test?retryWrites=true';
+let dev_db_url = '<MONGO DB CONNECTION STRING>';
 const mongoDB = process.env.MONGODB_URI || dev_db_url;
 //new parser for future compatibility
 mongoose.connect(mongoDB, {
@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 //home url and port binding
-app.use('/products', product);
+app.use('/home/login', product);
 let port = 5000;
 //server start response
 app.listen(port, () => {

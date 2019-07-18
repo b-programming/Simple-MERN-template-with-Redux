@@ -10,7 +10,7 @@ router.post('/create', product_controller.product_create);
 
 router.get('/:id', product_controller.product_details);
 
-//router.get('/all', product_controller.product_details_full);
+router.get('/id/:name', product_controller.product_full);
 
 router.put('/:id/update', product_controller.product_update);
 
